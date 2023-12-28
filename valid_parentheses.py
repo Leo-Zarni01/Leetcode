@@ -19,8 +19,9 @@ def isValid(s):
     ## edge cases
     if (len(s) == 1): ## valid bracket strings are of length >= 2
         return False
-    if not is_closed(s[-1]): ## ()[) => false
-        return False
+    else:
+        if not is_closed(s[-1]): ## ()[ => false
+            return False
 
     ## creating stack
     stack = []
@@ -52,5 +53,15 @@ def isValid(s):
 # example_one = "[]"
 # print(isValid(example_one))
 
-example_two = "[]()"
-print(isValid(example_two))
+# example_two = "[]()"
+# print(isValid(example_two))
+
+# edge case condition 1
+# example_three = "("
+# print(isValid(example_three))
+
+# edge case condition 2 
+example_four = "()("
+print(isValid(example_four))
+
+            
