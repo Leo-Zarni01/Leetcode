@@ -15,7 +15,7 @@ def return_special_cases(character, target):
             return (returnRomanValues(character), False)
     elif character == "C":
         if target == "D":
-            return 500, True
+            return 400, True
         elif target == "M":
             return 900, True
         else:
@@ -73,3 +73,6 @@ def romanToInt(number_string):
 
 # example_four = "DCXXI"
 # print(romanToInt(example_four)) 
+
+example_five = "MCDLXXVI"
+print(romanToInt(example_five)) ## expected 1476, received 1576
