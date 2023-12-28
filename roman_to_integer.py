@@ -44,13 +44,13 @@ def romanToInt(number_string):
     value = 0
     while i <= len(number_list) - 1:
         current = number_list[i]
-        print("Current value: ", value)
+        # print("Current value: ", value)
         if i + 1 <= len(number_list) - 1:
             ## compare with neighbor
             neighbor = number_list[i+1]
-            print(f"Current comparison: {current}, {neighbor}")
+            # print(f"Current comparison: {current}, {neighbor}")
             res_tuple = return_special_cases(current, neighbor)
-            print(res_tuple)
+            # print(res_tuple)
             value += res_tuple[0]
             if res_tuple[1] == True:
                 i += 2
@@ -75,4 +75,4 @@ def romanToInt(number_string):
 # print(romanToInt(example_four)) 
 
 example_five = "MCDLXXVI"
-print(romanToInt(example_five)) ## expected 1476, received 1576
+print(romanToInt(example_five)) ## expected 1476, received 1576 (fixed)
