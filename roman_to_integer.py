@@ -1,72 +1,75 @@
-"""
-Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+def return_special_cases(character, target):
+    if character == "I":
+        if (target == "V"):
+            return (4, True)
+        elif (target == "X"):
+            return (9, True)
+        else:
+            return (returnRomanValues(character), False)
+    elif character == "X":
+        if target == "L":
+            return 40,True
+        elif target == "C":
+            return 90, True
+        else:
+            return (returnRomanValues(character), False)
+    elif character == "C":
+        if target == "D":
+            return 500, True
+        elif target == "M":
+            return 900, True
+        else:
+            return (returnRomanValues(character), False)
+    else:
+        return (returnRomanValues(character), False)
 
-Symbol       Value
-I             1
-V             5
-X             10
-L             50
-C             100
-D             500
-M             1000
+def convert_string_to_list(number_string):
+    return list(number_string)
 
-For example, 2 is written as II in Roman numeral, just two ones added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.
+def returnRomanValues(character):
+    symbols = {
+        "I": 1,
+        "V": 5,
+        "X": 10, 
+        "L": 50,
+        "C": 100,
+        "D": 500,
+        "M": 1000
+    }
+    return symbols[character]
 
-Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
+def romanToInt(number_string):
+    number_list = convert_string_to_list(number_string)
+    i = 0
+    value = 0
+    while i <= len(number_list) - 1:
+        current = number_list[i]
+        print("Current value: ", value)
+        if i + 1 <= len(number_list) - 1:
+            ## compare with neighbor
+            neighbor = number_list[i+1]
+            print(f"Current comparison: {current}, {neighbor}")
+            res_tuple = return_special_cases(current, neighbor)
+            print(res_tuple)
+            value += res_tuple[0]
+            if res_tuple[1] == True:
+                i += 2
+            else:
+                i += 1
+        else:
+            value += returnRomanValues(current)
+            i += 1
+    return value
 
-I can be placed before V (5) and X (10) to make 4 and 9. 
-X can be placed before L (50) and C (100) to make 40 and 90. 
-C can be placed before D (500) and M (1000) to make 400 and 900.
-Given a roman numeral, convert it to an integer.
+# example_one = "III"
+# print(romanToInt(example_one))
+# print()
 
-Constraints:
+# example_two = "LVIII"
+# print(romanToInt(example_two))
 
-1 <= s.length <= 15
-s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').
-It is guaranteed that s is a valid roman numeral in the range [1, 3999].
+# example_three = "MCMXCIV"
+# print(romanToInt(example_three))
 
-Input: s = "III"
-Output: 3
-Explanation: III = 3.
-
-Input: s = "LVIII"
-Output: 58
-Explanation: L = 50, V= 5, III = 3.
-
-Input: s = "MCMXCIV"
-Output: 1994
-Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
-
-"""
-
-Roman_dict = {"I": 1, 'V': 5, 'X': 10 , 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-special_cases = {'IV': 4, 'IX': 9, 'XL':40, 'XC': 90, 'CD': 400, 'CM': 900}
-
-
-def check_special_cases(character):
-    if character in special_cases:
-        return True 
-    return False 
-
-def get_integer(roman_character):
-    return Roman_dict[roman_character]
-
-def get_special_case(roman_character):
-    return special_cases[roman_character]
-
-def main(number_string):
-    number_list = list(number_string)
-    index = 0
-    sum = 0
-    while index < len(number_list) - 2:
-        current_character = number_list[index] + number_list[index+1]
-        next_character = number_list[index+1] + number_list[index + 2]
-        check_current = check_special_cases(current_character)
-        check_next = check_special_cases(next_character)
-
-        
-        index += 1
-        #print(current_character, next_character)
-
-## test cases
-test_case_one = main("III")
+# example_four = "DCXXI"
+# print(romanToInt(example_four)) 
