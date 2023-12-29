@@ -32,7 +32,12 @@ def isValid(s):
 
     ## algo
     end = False
+    copy_stack = []
     while end is False:
+        print("Stack outer loop: ", stack)
+        print("copy stack outer loop: ", copy_stack)
+        if (stack == list(reversed(copy_stack))):
+            return True
         current = stack.pop()
         next = stack.pop()
         print(f"Current: {current}, next: {next}")
@@ -40,7 +45,7 @@ def isValid(s):
         match = check_pairs(current, next)
         print("Are they matching pairs?", match)
         if len(stack) == 0:
-            if match is True:
+            if match is True and len(copy_stack) == 0:
                 return True
             else:
                 return False
@@ -51,14 +56,13 @@ def isValid(s):
                     return False
                 else:
                     copy_stack = [next]
-            else:
-                copy_stack = []
             print("Remaining stack: ", stack)
+            print("copy stack initial: ", copy_stack)
             while len(stack) != 0:
                 dummy_pop = stack.pop()
                 print("Inside: ", dummy_pop)
                 print(f"Comparing: {current} and dummy: {dummy_pop}", check_pairs(current, dummy_pop))
-                if (check_pairs(current, dummy_pop) and len(copy_stack) == 0):
+                if check_pairs(current, dummy_pop):
                     break
                 else:
                     copy_stack.append(dummy_pop)
@@ -96,3 +100,11 @@ def isValid(s):
         
 # example_eight = "([)]"
 # print(isValid(example_eight))
+        
+# example_nine = f"{{[]}}"
+# print(example_nine)
+# print(isValid(example_nine))
+        
+example_ten = f"({{{{{{}}}}}})"
+print(example_ten)
+print(isValid(example_ten))
