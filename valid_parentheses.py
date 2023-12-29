@@ -58,7 +58,7 @@ def isValid(s):
                 dummy_pop = stack.pop()
                 print("Inside: ", dummy_pop)
                 print(f"Comparing: {current} and dummy: {dummy_pop}", check_pairs(current, dummy_pop))
-                if (check_pairs(current, dummy_pop)):
+                if (check_pairs(current, dummy_pop) and len(copy_stack) == 0):
                     break
                 else:
                     copy_stack.append(dummy_pop)
@@ -94,5 +94,5 @@ def isValid(s):
 # example_seven = "(]())()"
 # print(isValid(example_seven))
         
-example_eight = "([)]"
-print(isValid(example_eight))
+# example_eight = "([)]"
+# print(isValid(example_eight))
