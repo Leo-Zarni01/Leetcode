@@ -28,6 +28,7 @@ def isValid(s):
     s_list = convert_string_to_list(s)
     for each_bracket in s_list:
         stack.append(each_bracket)
+    print("Initial stack: ", stack)
 
     ## algo
     end = False
@@ -44,11 +45,30 @@ def isValid(s):
             else:
                 return False
         else:
-            copy_stack = []
             if not match:
-                while len(stack) != 0:
-                    copy_stack.append(stack.pop())
-            print("Copy: ", copy_stack) 
+                print(f"Is {next} closed?", is_closed(next))
+                if not is_closed(next):
+                    return False
+                else:
+                    copy_stack = [next]
+            else:
+                copy_stack = []
+            print("Remaining stack: ", stack)
+            while len(stack) != 0:
+                dummy_pop = stack.pop()
+                print("Inside: ", dummy_pop)
+                print(f"Comparing: {current} and dummy: {dummy_pop}", check_pairs(current, dummy_pop))
+                if (check_pairs(current, dummy_pop)):
+                    break
+                else:
+                    copy_stack.append(dummy_pop)
+                print()
+            print("Copy: ", copy_stack)
+            for each_bracket in reversed(copy_stack):
+                stack.append(each_bracket)
+            print("new stack:", stack)
+        print()
+        print()
 
 # example_one = "[]"
 # print(isValid(example_one))
@@ -61,7 +81,18 @@ def isValid(s):
 # print(isValid(example_three))
 
 # edge case condition 2 
-example_four = "()("
-print(isValid(example_four))
+# example_four = "()("
+# print(isValid(example_four))
 
-            
+# example_five = "(]"
+# print(isValid(example_five))
+
+# example_six = f"({{}})" 
+# print(example_six)
+# print(isValid(example_six))
+        
+# example_seven = "(]())()"
+# print(isValid(example_seven))
+        
+example_eight = "([)]"
+print(isValid(example_eight))
