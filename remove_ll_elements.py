@@ -10,25 +10,26 @@ class Solution:
     def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
         res = ListNode()
         curr = res
-        curr.next = head
+        # print("must match value: ", val)
+        # print("------------------------")
         while head:
-            print("-------------------------")
-            print("head is: ", head)
-            print("current is: ", curr)
-            print("-------------------------")
-            if head.next is not None:
-                if head.next.val == val:
-                    print("Match")
-                    temp = head.next.next
-                    head.next = temp
+            # print("res before: ", res)
+            # print("current head is: ", head.val)
+            # print("curr pointer is: ", curr.val)
+            if head.val == val:
+                if head.next is None:
+                    # print("At the end of the road...")
+                    curr.next = None
+                    curr = curr.next
+                else:
+                    # print("match found, so continue")
+                    pass
             else:
-                if head.val == val:
-                    break
+                # print("match not found, will update curr pointer")
+                curr.next = head
+                # print("curr will now point to ", head.val)
+                curr = curr.next
             head = head.next
-            print("new head is: ", head)
-            curr = curr.next
-            print("new current is: ", curr)
-            print("Res: ", res)
-        print("After while loop: ", curr)
+            # print("res after: ", res)
+            # print()
         return res.next
-        
