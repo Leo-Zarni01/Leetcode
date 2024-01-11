@@ -16,3 +16,17 @@ class Solution:
                 highest = each[1]
                 key = each[0]
         return key if highest > maximum else 0
+    
+    def majorityElementOther(self, nums: List[int]) -> int: ## this is boyer-moore majority vote algorithm
+        majority = nums[0]
+        count = 1
+        for i in range(1, len(nums)):
+            if nums[i] != majority:
+                count -= 1
+            else:
+                count += 1
+        
+            if count == 0:
+                majority = nums[i]
+                count = 1 ## reset
+        return majority
