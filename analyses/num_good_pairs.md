@@ -15,15 +15,16 @@ A pair, $\large (i, j)$ is called _good_ if $\large \text{nums[i] == nums[j]}$ a
 
 ## $\text{Analysis}$.
 By iterating through the array and keeping track of the number of occurrences of each number, we are able to perform a mathematical analysis. We know that for any arbitrary array $\large A$ with $\large k$ elements, if there are $\large n$ repetitions, then the total number of pairs that are formed is given by 
-$$
+
+```math 
 \large 
 S = n-1 + n-2 + n-3 + \ldots  + 1.
-$$
+```
 We can see this is the case as shown below. Suppose we have an array $\large A$ as such:
-$$
+```math
 \large 
 A = [1,2, 3, 1, 1, 3]
-$$
+```
 we can see that 
 $$
 \large 
