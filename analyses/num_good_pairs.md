@@ -26,22 +26,21 @@ We can see this is the case as shown below. Suppose we have an array $\large A$ 
 A = [1,2, 3, 1, 1, 3]
 ```
 we can see that 
-$$
+```math
 \large 
 \begin{array}{c |c | c}
 
 \text{Number}  & 1 & 2 & 3\\ 
 \hline
 \text{Occurence(s)} & 3 & 1 & 2\\
-
 \end{array}
-$$
+```
 Therefore, the total number of pairs for each number are:
-$$
+```math 
 \large 
 \begin{aligned}
 \text{Number} &:= 1 => (3-1) + (3-2) = 3 \text{ pairs} \\[7pt]
 &:= 3 => (2 - 1) \text{ pairs}.
 \end{aligned}
-$$
+```
 So adding them altogether gives us $\large 4$ _good_ pairs.
