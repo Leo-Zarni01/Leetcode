@@ -14,7 +14,7 @@ A pair, $\large (i, j)$ is called _good_ if $\large \text{nums[i] == nums[j]}$ a
 5. Return the variable $\large \text{res}$.
 
 ## $\text{Analysis}$.
-By iterating through the array and keeping track of the number of occurrences of each number, we are able to perform a mathematical analysis. We know that for any arbitrary array $\large A$ with $\large k$ elements, if there are $\large n$ repetitions, then the total number of pairs that are formed is given by 
+By iterating through the array and keeping track of the number of occurrences of each number, we are able to perform a mathematical analysis. We know that for any arbitrary array $\large A$ with $\large k$ elements, if there are $\large n$ repetitions, then the total number of pairs $\large S$ that is formed is given by 
 
 ```math 
 \large 
