@@ -1,26 +1,29 @@
 from typing import List
-import math
-
-def multiply(nums: List[int]) -> int: 
-    result = math.prod(nums)
-    return result
 
 def productExceptSelf(nums: List[int]) -> List[int]:
-    res = nums.copy()
+    ## print("List to analyze: ", nums)
+    cumulative_left = []
+    product = 1
     for index in range(len(nums)):
-        print("Current number is: ", nums[index])
-        left = nums[:index].copy()
-        right = nums[index + 1:].copy()
-        print("Left is: ", left)
-        print("right is: ", right)
-        left_product = multiply(left)
-        right_product = multiply(right)
-        total = left_product * right_product
-        print("New number is: ", total)
-        res[index] = total
-        print()
-    return res
+        ## print("Current number is ", nums[index])
+        product *= nums[index]
+        cumulative_left.append(product)
+        ## print()
 
+    cumulative_product = 1
+    for index in range(len(nums) - 1, -1, -1):
+        ## print("Current number pointing to is: ", nums[index])
+        if index == 0:
+            cumulative_left[index] = cumulative_product
+        else:
+            product = cumulative_left[index - 1] * cumulative_product
+            cumulative_left[index] = product
+        ## print(f"Product = {cumulative_left[index - 1]} * { cumulative_product}")
+        ## print("Previous cumulative product is: ", cumulative_product)
+        cumulative_product = cumulative_product * nums[index]
+        ## print("New cumulative product is: ", cumulative_product)
+        ## print()
+    return cumulative_left
 ## nums = [1, 2, 4, 6]
 ## res = productExceptSelf(nums)
 ## print(res)
