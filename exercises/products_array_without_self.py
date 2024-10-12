@@ -2,23 +2,23 @@ from typing import List
 import math
 
 def multiply(nums: List[int]) -> int: 
-    result = 0
-    if len(nums) >= 1:
-        result = math.prod(nums)
+    result = math.prod(nums)
     return result
 
 def productExceptSelf(nums: List[int]) -> List[int]:
     res = nums.copy()
     for index in range(len(nums)):
-        temp = []
-        for other_index in range(len(nums)):
-            if index == other_index:
-                continue
-            temp.append(nums[other_index])
-        print("To multiply: ", temp)
-        product = multiply(temp)
-        print("Product is: ", product)
-        res[index] = product
+        print("Current number is: ", nums[index])
+        left = nums[:index].copy()
+        right = nums[index + 1:].copy()
+        print("Left is: ", left)
+        print("right is: ", right)
+        left_product = multiply(left)
+        right_product = multiply(right)
+        total = left_product * right_product
+        print("New number is: ", total)
+        res[index] = total
+        print()
     return res
 
 ## nums = [1, 2, 4, 6]
@@ -33,6 +33,10 @@ def productExceptSelf(nums: List[int]) -> List[int]:
 ## res2 = productExceptSelf(nums2)
 ## print(res2)
 
-nums = [0, 8, 0]
+## nums = [0, 8, 0]
+## res = productExceptSelf(nums)
+## print(res)
+
+nums = [1, 2, 3, 4]
 res = productExceptSelf(nums)
 print(res)
