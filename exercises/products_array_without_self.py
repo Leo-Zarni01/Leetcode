@@ -1,29 +1,22 @@
 from typing import List
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        cumulative_left = []
+        product = 1
+        for index in range(len(nums)):
+            product *= nums[index]
+            cumulative_left.append(product)
 
-def productExceptSelf(nums: List[int]) -> List[int]:
-    ## print("List to analyze: ", nums)
-    cumulative_left = []
-    product = 1
-    for index in range(len(nums)):
-        ## print("Current number is ", nums[index])
-        product *= nums[index]
-        cumulative_left.append(product)
-        ## print()
+        cumulative_product = 1
+        for index in range(len(nums) - 1, -1, -1):
+            if index == 0:
+                cumulative_left[index] = cumulative_product
+            else:
+                product = cumulative_left[index - 1] * cumulative_product
+                cumulative_left[index] = product
+            cumulative_product = cumulative_product * nums[index]
+        return cumulative_left
 
-    cumulative_product = 1
-    for index in range(len(nums) - 1, -1, -1):
-        ## print("Current number pointing to is: ", nums[index])
-        if index == 0:
-            cumulative_left[index] = cumulative_product
-        else:
-            product = cumulative_left[index - 1] * cumulative_product
-            cumulative_left[index] = product
-        ## print(f"Product = {cumulative_left[index - 1]} * { cumulative_product}")
-        ## print("Previous cumulative product is: ", cumulative_product)
-        cumulative_product = cumulative_product * nums[index]
-        ## print("New cumulative product is: ", cumulative_product)
-        ## print()
-    return cumulative_left
 ## nums = [1, 2, 4, 6]
 ## res = productExceptSelf(nums)
 ## print(res)
@@ -41,5 +34,5 @@ def productExceptSelf(nums: List[int]) -> List[int]:
 ## print(res)
 
 nums = [1, 2, 3, 4]
-res = productExceptSelf(nums)
+res = Solution().productExceptSelf(nums)
 print(res)
