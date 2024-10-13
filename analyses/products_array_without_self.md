@@ -11,7 +11,7 @@ You must write an algorithm that runs in $O(n)$ time and without using the divis
 3. Go through the `nums` array from the right this time, replacing the values from `cumulative_left` accordingly:
   1. Initialize a variable $\text{cumulative product}$ which we will use to multiply with values from `nums`
   2. If $i \neq 0$,
-    1. Let $\text{product(i)} = \text{left}(i - 1) * \text{cumulative_product}$ where $i \neq 0$
+    1. Let $\text{product(i)} = \text{left}(i - 1) * \text{cumulative product}$ where $i \neq 0$
     2. Replace $\text{cumulative left}(i)$ with $\text{product}(i)$ if $i \neq 0$
     3. Update $\text{cumulative product}$ by multiplying with $\text{nums}(i)$ (Refer to 3.1.)
   3. Otherwise,
