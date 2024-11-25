@@ -1,7 +1,6 @@
 from typing import List
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        nums.sort()
         i = 0
         counts = {}
         while i < len(nums):
@@ -14,4 +13,5 @@ class Solution:
         for key in counts.keys():
             if counts[key] == 1:
                 return key
+        return 1 
         
