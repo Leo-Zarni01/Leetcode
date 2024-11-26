@@ -1,20 +1,17 @@
 from typing import List
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        for index in range(len(numbers)):
-            slow_index = index
-            fast_index = slow_index + 1
-            current = numbers[slow_index]
-            difference = target - current
-            print(f"Current number is: {current}")
-            print("Difference is: ", difference)
-            
-            for inner_index in range(fast_index, len(numbers)):
-                fast = numbers[inner_index]
-                print("Testing with ", fast)
-                if fast == difference:
-                    return [slow_index + 1, inner_index + 1]
-            print()
+        left = 0
+        right = len(numbers) - 1
+        for _ in range(len(numbers)):
+            left_num = numbers[left]
+            right_num = numbers[right]
+            if left_num + right_num > target:
+                right -= 1
+            elif left_num + right_num < target:
+                left += 1
+            elif left_num + right_num == target:
+                return [left + 1, right + 1] # because array is 1-indexed
         return []
 
 demo_one = Solution()
