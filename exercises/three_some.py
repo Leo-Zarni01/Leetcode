@@ -26,7 +26,7 @@ class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         solutions = []
         nums.sort()
-        triplet_tracker = {}
+        triplet_tracker = set()
 
         for index in range(len(nums)):
             print("Sorted array is: ", nums)
@@ -44,19 +44,14 @@ class Solution:
                     first_number = nums[each_pair[0] + index + 1]
                     second_number = nums[each_pair[1] + index + 1]
                     sol = (curr, first_number, second_number)
+                    triplet_tracker.add(sol)
                     print("Triplet so far is: ", sol)
-                    if sol not in triplet_tracker:
-                        triplet_tracker[sol] = True
             print("Triplets: ", triplet_tracker)
             print()
 
         for each_triplet in triplet_tracker:
-            first = each_triplet[0]
-            second = each_triplet[1]
-            third = each_triplet[2]
-            triplet_list = [first, second, third]
-            solutions.append(triplet_list)
-
+            triplet_as_list = list(each_triplet)
+            solutions.append(triplet_as_list)
         return solutions
 
 demo_one = Solution()
