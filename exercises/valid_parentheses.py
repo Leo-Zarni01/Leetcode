@@ -1,81 +1,33 @@
-def convert_string_to_list(input_string):
-    return list(input_string)
-
-def check_pairs(closed, opened):
-    if closed == ")" and opened == "(":
-        return True
-    elif closed == "}" and opened == "{":
-        return True
-    elif closed == "]" and opened == "[":
-        return True
-    return False
-
-def is_closed(bracket):
-    if bracket in [")", "}", "]"]:
-        return True
-    return False
-
-def isValid(s):
-    ## edge cases
-    if (len(s) == 1): ## valid bracket strings are of length >= 2
-        return False
-    else:
-        if not is_closed(s[-1]): ## ()[ => false
-            return False
-
-    ## creating stack
-    stack = []
-    s_list = convert_string_to_list(s)
-    for each_bracket in s_list:
-        stack.append(each_bracket)
-    print("Initial stack: ", stack)
-
-    ## algo
-    end = False
-    copy_stack = []
-    while end is False:
-        print("Stack outer loop: ", stack)
-        print("copy stack outer loop: ", copy_stack)
-        if (stack == list(reversed(copy_stack))):
+class Solution:
+    def is_closed(self, bracket):
+        if bracket in [")", "}", "]"]:
             return True
-        current = stack.pop()
-        next = stack.pop()
-        print(f"Current: {current}, next: {next}")
-
-        match = check_pairs(current, next)
-        print("Are they matching pairs?", match)
-        if len(stack) == 0:
-            if match is True and len(copy_stack) == 0:
-                return True
+        return False
+    
+    def return_closed(self, bracket):
+        if bracket == "{":
+            return "}"
+        elif bracket == "[":
+            return "]"
+        elif bracket == "(":
+            return ")"
+        return ""
+    
+    def isValid(self, s):
+        stack = []
+        for current_bracket in s:
+            is_it_closed = self.is_closed(current_bracket)
+            if not is_it_closed:
+                close_bracket = self.return_closed(current_bracket)
+                stack.append(close_bracket)
             else:
-                return False
-        else:
-            if not match:
-                print(f"Is {next} closed?", is_closed(next))
-                if not is_closed(next):
+                if stack.pop() != current_bracket or len(stack) == 0:
                     return False
-                else:
-                    copy_stack = [next]
-            print("Remaining stack: ", stack)
-            print("copy stack initial: ", copy_stack)
-            while len(stack) != 0:
-                dummy_pop = stack.pop()
-                print("Inside: ", dummy_pop)
-                print(f"Comparing: {current} and dummy: {dummy_pop}", check_pairs(current, dummy_pop))
-                if check_pairs(current, dummy_pop):
-                    break
-                else:
-                    copy_stack.append(dummy_pop)
-                print()
-            print("Copy: ", copy_stack)
-            for each_bracket in reversed(copy_stack):
-                stack.append(each_bracket)
-            print("new stack:", stack)
-        print()
-        print()
+        if len(stack) >= 1:
+            return False
+        return True
 
-# example_one = "[]"
-# print(isValid(example_one))
+example_one = "[]"
 
 # example_two = "[]()"
 # print(isValid(example_two))
@@ -105,6 +57,6 @@ def isValid(s):
 # print(example_nine)
 # print(isValid(example_nine))
         
-example_ten = f"({{{{{{}}}}}})"
-print(example_ten)
-print(isValid(example_ten))
+## example_ten = f"({{{{{{}}}}}})"
+## print(example_ten)
+## print(isValid(example_ten))
