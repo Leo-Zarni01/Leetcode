@@ -21,10 +21,12 @@ class Solution:
                 close_bracket = self.return_closed(current_bracket)
                 stack.append(close_bracket)
             else:
-                if stack.pop() != current_bracket or len(stack) == 0:
+                if len(stack) == 0 or stack.pop() != current_bracket:
                     return False
+        
         if len(stack) >= 1:
             return False
+        
         return True
 
 example_one = "[]"
