@@ -1,55 +1,73 @@
-import re
 from typing import List
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        if len(temperatures) == 1:
-            return [0]
-        s1 = [temperatures[0]]
-        results = []
-        res = 0
-        smaller_ctr = 0
-        index = 1
-        while len(results) != len(temperatures): 
+        results = [-1] * (len(temperatures))
+        stack = []
+        index = len(temperatures) - 1
+        while index > -1:
+            print("Current index: ", index)
             print("Results so far: ", results)
+            print("Stack before update: ", stack)
             current = temperatures[index]
-            print(f"Current temperature is: {current}")
-            top_s1 = s1[-1]
-            print("s1 stack: ", s1)
-            print("Top of s1 stack: ", top_s1)
-            
-            if index == len(temperatures) - 1:
-                print("At the end of the road...")
-                if current <= top_s1:
-                    for _ in range(smaller_ctr):
-                        results.append(0)
-                else:
-                    results.append(1)
-                    results.append(0)
-                break
-            res += 1
-            if current > top_s1:
-                results.append(res)
-                print(f"It is hot after {res} days")
-                res = 0
-                if len(s1) == 0:
-                    s1.append(current)
-                else:
-                    index = len(s1)
-                    print("Index is now at: ", index)
-                    s1.append(temperatures[len(s1)])
-                print("Updated stack, s1 is now: ", s1)
+            print("Current temperature is: ", current)
+            difference_index = None
+            if len(stack) == 0:
+                stack.append(index)
+                print("Stack after update: ", stack)
+                results[index] = 0
+                print()
+                index -= 1
+                continue
+            top = stack[-1]
+            print("Top of stack index: ", top)
+            temperature_from_top_stack = temperatures[top]
+            print("From top stack, temperature is: ", temperature_from_top_stack)
+            if temperature_from_top_stack > current:
+                print("Top of stack is bigger")
+                difference_index = top - index
+                print("Difference is: ", difference_index)
+                results[index] = difference_index
+                stack.append(index)
             else:
-                smaller_ctr += 1
-                print("Skip")
+                print("Top of stack is smaller")
+                stack_index = len(stack) - 1
+                stack_temperature_index = stack[stack_index]
+                print(f"Is top of stack: {temperatures[stack_temperature_index]} smaller than current temperature: {current}? ", temperatures[stack_index] < current)
+                while temperatures[stack_temperature_index] <= current:
+                    print(f"{temperatures[stack_temperature_index]} vs {current}")
+                    if len(stack) == 0:
+                        results[index] = 0
+                        break
+                    else:
+                        stack_index -= 1
+                        stack_temperature_index = stack[stack_index]
+                        stack.pop()
+                    print("Stack after popping: ", stack)
+                if len(stack) != 0:
+                    top = stack[-1]
+                    print("Top now is: ", top)
+                    difference_index = top - index
+                    print("Difference is: ", difference_index)
+                    results[index] = difference_index
+                stack.append(index)
+            print("Stack at the end: ", stack)
             print()
-            index += 1
-        print("Final results: ", results)
+            index -= 1
+        print("Final results is: ", results)
         return results
 
 ## example_1 = Solution()
 ## temperatures = [30,38,30, 36, 35, 40, 28]
 ## results = example_1.dailyTemperatures(temperatures)
 
+## example_1 = Solution()
+## temperatures = [73, 74, 75, 71, 69, 72, 76, 73]
+## results = example_1.dailyTemperatures(temperatures)
+
+## example_1 = Solution()
+## temperatures = [33, 32, 31]
+## results = example_1.dailyTemperatures(temperatures)
+
 example_1 = Solution()
-temperatures = [33, 32, 31]
+temperatures = [89,62,70,58,47,47,46,76,100,70]
 results = example_1.dailyTemperatures(temperatures)
