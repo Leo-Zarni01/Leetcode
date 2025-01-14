@@ -17,14 +17,3 @@ class Solution:
                 stack.pop()
             print()
         return len(stack)
-
-## example_1 = Solution()
-## position = [4,1,0,7]
-## speeds = [2, 2, 1, 1]
-## carFleet_1 = example_1.carFleet(10, position, speeds)
-
-example_1 = Solution()
-target=12
-position=[10,8,0,5,3]
-speed=[2,4,1,1,3]
-carFleet_1 = print(example_1.carFleet(target, position, speed))
