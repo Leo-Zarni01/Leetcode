@@ -8,17 +8,25 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        res, curr = None, head
-        while curr:
-            # print(f"curr is: {curr.val}")
-            nxt = curr.next ## keep track temporarily
-            # if nxt:
-            #     print(f"next is: {nxt.val}")
-            curr.next = res
-            res = curr
-            # print(f"reverse head is: {res.val}")
-            curr = nxt ## notice i did not do curr.next because on line 14, curr.next is set to None. Instead,
-                        ## curr.next is set to temp next, which we got from line 11
-            # print("new: ", curr)
-            # print()
-        return res
+        if head is None:
+            return None
+
+        if head.next is None:
+            return head
+
+        ## create two pointers,
+        current_node = head
+        previous_node = None
+
+        ## traverse
+        while current_node.next is not None:
+            ## keep track of next node 
+            next_node = current_node.next
+            
+            ## here comes the tricky part, manipulating the pointers
+            current_node.next = previous_node
+            previous_node = current_node
+            current_node = next_node
+        
+        head = previous_node
+        return head
